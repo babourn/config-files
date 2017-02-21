@@ -87,7 +87,6 @@ if has("autocmd")
 else
 
   set autoindent		" always set autoindenting on
-
 endif " has("autocmd")
 
 " Convenient command to see the difference between the current buffer and the
@@ -101,6 +100,7 @@ endif
 "Brian's Vim settings
 " Line numbers
   set number
+  set pastetoggle=<F3>		" give myself a toggle for pasting
 "
 " " Buffer switching using Cmd-arrows in Mac and Alt-arrows in Linux
   :nnoremap <D-Right> :bnext<CR>
@@ -110,12 +110,16 @@ endif
   " and don't let MacVim remap them
   if has("gui_macvim")
      let macvim_skip_cmd_opt_movement = 1
-     endif
+ endif
 "
 "    " When coding, auto-indent by 4 spaces, just like in K&R
 "    " Note that this does NOT change tab into 4 spaces
 "    " You can do that with "set tabstop=4", which is a BAD idea
-     set shiftwidth=4
+    set shiftwidth=4
+    set tabstop=4
+    set expandtab
+    
+
 "
 "    " Always replace tab with spaces, except for makefiles
 "    set expandtab
