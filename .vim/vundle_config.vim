@@ -46,6 +46,7 @@ Plugin    'https://github.com/jamessan/vim-gnupg'
 Plugin    'https://github.com/jistr/vim-nerdtree-tabs.git'
 Plugin    'https://github.com/mhinz/vim-signify'
 Plugin    'https://github.com/mhinz/vim-startify'
+Plugin    'https://github.com/vim-syntastic/syntastic'
 "
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
