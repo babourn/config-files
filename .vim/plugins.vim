@@ -108,7 +108,7 @@ nnoremap K :Man <cword><cr>
 " Colorscheme plugin, no config necessary
 
 "================================================
-" 13 - nerdtree
+" 11 - nerdtree
 "      https://github.com/scrooloose/nerdtree.git
 "================================================
 
@@ -119,13 +119,13 @@ let NERDTreeShowHidden        = 1
 let NERDTreeShowLineNumbers   = 1
 
 "============================================
-" 14 - numbers
+" 12 - numbers
 "      https://github.com/myusuf3/numbers.vim
 "============================================
 let g:numbers_exclude = ['unite', 'startify', 'gundo', 'undo']
 
 "========================================
-" 15 - rainbow parenthesis improved
+" 13 - rainbow parenthesis improved
 "      https://github.com/oblitum/rainbow
 "========================================
 
@@ -139,7 +139,7 @@ let g:rainbow_load_separately = [
     \ ]
 
 "==========================================
-" 16 - tagbar
+" 14 - tagbar
 "      https://github.com/majutsushi/tagbar
 "      http://majutsushi.github.io/tagbar/
 "==========================================
@@ -185,7 +185,7 @@ let g:tagbar_type_armasm = {
 \}
 
 "========================================
-" 17 - undotree
+" 15 - undotree
 "      https://github.com/mbbill/undotree
 "========================================
 nnoremap <silent> <F6> :UndotreeToggle<CR>
@@ -194,7 +194,7 @@ let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_SplitWidth = 40
 
 "==========================================
-" 21 - vim-airline
+" 16 - vim-airline
 "      https://github.com/bling/vim-airline
 "==========================================
 
@@ -208,18 +208,18 @@ endif
 
 " unicode symbols
 " TODO: test it under windows
-let g:airline_left_sep = '»'
+"let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
+"let g:airline_right_sep = '«'
 let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
+"let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.linenr = '␤'
+"let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.paste = 'Þ'
+"let g:airline_symbols.paste = '∥'
+"let g:airline_symbols.whitespace = 'Ξ'
 
 " powerline symbols
 "let g:airline_left_sep = ''
@@ -231,7 +231,7 @@ let g:airline_symbols.whitespace = 'Ξ'
 "let g:airline_symbols.linenr = ''
 
 " Set airline theme manually
-let g:airline_theme="kolor"
+let g:airline_theme="badwolf"
 " fix messed up symbols
 " TODO: test it under windows
 if has('unix')
@@ -265,20 +265,18 @@ let g:airline#extensions#branch#empty_message = ''
 let g:airline#extensions#eclim#enabled = 0
 
 "=================================================
-" 22 - vim-easymotion
+" 17 - vim-easymotion
 "      https://gitthub.com/Lokaltog/vim-easymotion
 "=================================================
 
 let g:EasyMotion_smartcase = 1
-
-map s <Plug>(easymotion-bd-w)
 
 " JK motions: Line motions
 nmap <Leader>j <Plug>(easymotion-j)
 nmap <Leader>k <Plug>(easymotion-k)
 
 "=======================================================
-" 23 - vim-flavoured-markdown
+" 18 - vim-flavoured-markdown
 "      https://github.com/jtratner/vim-flavored-markdown
 "=======================================================
 if has("autocmd")
@@ -289,25 +287,25 @@ if has("autocmd")
 endif
 
 "===========================================
-" 23 - vim-fugitive
+" 19 - vim-fugitive
 "      https://github.com/tpope/vim-fugitive
 "===========================================
 
 "======================================
-" 24 - vim-git
+" 20 - vim-git
 "      https://github.com/tpope/vim-git
 "======================================
 " Syntax plugin, no config necessary
 
 "===========================================
-" 25 - vim-gnupg
+" 21 - vim-gnupg
 "      https://github.com/jamessan/vim-gnupg
 "===========================================
 " No adicional config so far
 
 
 "====================================================
-" 27 - vim-nerdtree-tabs
+" 22 - vim-nerdtree-tabs
 "      https://github.com/jistr/vim-nerdtree-tabs.git
 "====================================================
 
@@ -317,7 +315,7 @@ let g:nerdtree_tabs_open_on_console_startup = 0
 let g:nerdtree_tabs_no_startup_for_diff     = 0
 
 "==========================================
-" 28 - vim-signify
+" 23 - vim-signify
 "      https://github.com/mhinz/vim-signify
 "==========================================
 
@@ -339,7 +337,7 @@ highlight SignifySignDelete gui=bold  guifg=red
 highlight SignifySignChange gui=bold  guifg=darkorange
 
 "===========================================
-" 29 - vim-startify
+" 24 - vim-startify
 "      https://github.com/mhinz/vim-startify
 "===========================================
 
@@ -369,21 +367,19 @@ let g:startify_bookmarks = [
 
 " ascii text: http://patorjk.com/software/taag/
 let g:startify_custom_header = [
-            \'     __      ___             ______ _  _',
-            \'     \ \    / (_)           |____  | || |',
-            \'      \ \  / / _ _ __ ___       / /| || |_',
-            \'       \ \/ / | | `_ ` _ \     / / |__   _|',
-            \'        \  /  | | | | | | |   / / _   | |',
-            \'         \/   |_|_| |_| |_|  /_/ (_)  |_|',
+            \'__/\\\________/\\\__/\\\\\\\\\\\__/\\\\____________/\\\\_______________/\\\\\\\\\______________/\\\\\\\____        ', 
+            \' _\/\\\_______\/\\\_\/////\\\///__\/\\\\\\________/\\\\\\_____________/\\\///////\\\__________/\\\/////\\\__       ', 
+            \'  _\//\\\______/\\\______\/\\\_____\/\\\//\\\____/\\\//\\\____________\/\\\_____\/\\\_________/\\\____\//\\\_      ', 
+            \'   __\//\\\____/\\\_______\/\\\_____\/\\\\///\\\/\\\/_\/\\\____________\///\\\\\\\\\/_________\/\\\_____\/\\\_     ', 
+            \'    ___\//\\\__/\\\________\/\\\_____\/\\\__\///\\\/___\/\\\_____________/\\\///////\\\________\/\\\_____\/\\\_    ', 
+            \'     ____\//\\\/\\\_________\/\\\_____\/\\\____\///_____\/\\\____________/\\\______\//\\\_______\/\\\_____\/\\\_   ', 
+            \'      _____\//\\\\\__________\/\\\_____\/\\\_____________\/\\\___________\//\\\______/\\\________\//\\\____/\\\__  ', 
+            \'       ______\//\\\________/\\\\\\\\\\\_\/\\\_____________\/\\\____________\///\\\\\\\\\/____/\\\__\///\\\\\\\/___ ', 
+            \'        _______\///________\///////////__\///______________\///_______________\/////////_____\///_____\///////_____',
             \ '',
             \ ]
 
-let g:startify_custom_footer = [
-    \ '',
-    \'   “It is not that I am so smart ,it is just that I stay with problems longer.”',
-    \ '   Albert Einstein',
-    \ '',
-    \ ]
+let g:startify_custom_footer = startify#fortune#quote()
 
 if has('gui_running')
     call SetWindowSize()
@@ -391,7 +387,7 @@ endif
 
 
 "===============================================
-" 37 - YouCompleteMe
+" 25 - YouCompleteMe
 "      https://github.com/Valloric/YouCompleteMe
 "===============================================
 
@@ -464,3 +460,18 @@ let g:ycm_semantic_triggers =  {
 " off because Ultisnips is not active yet
 let g:ycm_use_ultisnips_completer = 0
 let g:ycm_goto_buffer_command = 'new-tab'
+
+"===============================================
+" 26 - syntastic
+"      https://github.com/vim-syntastic/syntastic
+"===============================================
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+

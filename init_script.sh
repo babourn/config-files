@@ -62,3 +62,7 @@ git config --global user.email ba.bourn@gmail.com
 git config --global alias.st status
 git config --global core.editor vim
 git config --global push.default simple
+git config --global color.status auto
+git config --global color.branch auto
+git config --global color.diff auto
+git config --global color.interactive auto
