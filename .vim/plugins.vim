@@ -252,7 +252,7 @@ let g:airline_detect_paste=1
 
 " enable/disable automatic population of the `g:airline_symbols` dictionary
 " with powerline symbols.
-let g:airline_powerline_fonts=0
+let g:airline_powerline_fonts=1
 
 " enable/disable fugitive/lawrencium integration
 let g:airline#extensions#branch#enabled=1

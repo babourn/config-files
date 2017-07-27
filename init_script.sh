@@ -32,6 +32,20 @@ if  ! vim --version | grep -qw "Vi IMproved 8" ; then
     cd $basedir
 fi
 
+echo "download powerline fonts"
+# clone
+if [  ! -d $basedir/fonts ]; then
+    git clone https://github.com/powerline/fonts.git
+    ln -s ./fonts $HOME/.fonts
+else
+    cd fonts
+    git pull
+fi
+
+echo "update font cache"
+fc-cache $HOME/.fonts
+
+
 echo "Setting up Vundle"
 if [ ! -d "$vimdir/bundle/Vundle.vim" ]; then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim

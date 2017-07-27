@@ -1,0 +1,7 @@
+[user]
+	name = Brian Bourn
+	email = ba.bourn@gmail.com
+[alias]
+	st = status
+[push]
+	default = simple
