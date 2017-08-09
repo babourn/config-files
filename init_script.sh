@@ -2,17 +2,38 @@
 basedir=$PWD
 vimdir=$HOME/.vim
 vimfile=$HOME/.vimrc
+distro="unknown"
+packages=( "automake" "cmake" "llvm" "autoconf")
+if [ $(/usr/bin/rpm -q -f /usr/bin/rpm) -ne 127 ]; then
+    distro="fedora"
+elif /usr/bin/dpkg --search /usr/bin/dpkg ; then
+    distro="debian"
+fi
 
-echo "Update All Current Yum Packages"
-sudo yum -y update
+echo "Update All Current  Packages"
+if [ $distro = "fedora" ]; then
+    sudo yum -y update
+    packages+=( "ncurses-devel" "python-devel" "python34-devel" "autotools-devel")
+    
+elif [ $distro = "debian" ]; then
+    sudo apt-get -y update
+    sudo apt-get -y dist-upgrade
+    packages+=( "libncurses-devel" "python-dev" "python3.5" "autotools-dev")
+fi
 
 echo "Installing dependencies"
-packages=( "ncurses-devel" "automake" "cmake" "python-devel" "python34-devel" "llvm" )
 
 for i in ${packages[@]}; do
     echo "checking $i"
-    if ! rpm -qa |grep -qw $i ; then
-        sudo yum -y install $i
+    
+    if [ $distro = "fedora" ]; then	
+        if  ! rpm -qa |grep -qw $i ; then
+            sudo yum -y install $i
+        fi
+    elif [ $distro = "debian" ]; then
+        if [ $(dpkg-query -W -f'${Status}' $i |grep -qw "install ok installed") ] ; then
+            sudo apt-get -y install $i
+        fi
     fi
 done
 
@@ -56,7 +77,7 @@ vim +PluginInstall +qall
 echo "compiling YouCompleteMe"
 
 
-#clangversion="llvm"  # Default: download from llvm.org
+clangversion="llvm"  # Default: download from llvm.org
 #clangversion="local" #Uncomment this line if you wanna use or local version
 cd $vimdir/bundle/YouCompleteMe
 
