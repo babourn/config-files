@@ -10,6 +10,7 @@ elif /usr/bin/dpkg --search /usr/bin/dpkg ; then
     distro="debian"
 fi
 
+
 echo "Update All Current  Packages"
 if [ $distro = "fedora" ]; then
     sudo yum -y update
@@ -53,6 +54,20 @@ if  ! vim --version | grep -qw "Vi IMproved 8" ; then
     cd $basedir
 fi
 
+echo "dealing with current .vim and .vimrc"
+if [ -d $HOME/.vim ]; then
+    cp -r $HOME/.vim $basedir/.vim.bak
+    rm -rf $HOME/.vim
+fi
+if [-d $HOME/.vimrc ]; then
+    cp -r $HOME/.vimrc $basedir/.vimrc
+    rm -rf $HOME/.vimrc
+fi
+
+echo "link .vim and .vimrc"
+ln -s $HOME/.vim $basedir/.vim
+ln -s $HOME/.vimrc $basedir/.vimrc
+
 echo "download powerline fonts"
 # clone
 if [  ! -d $basedir/fonts ]; then
@@ -68,14 +83,17 @@ fc-cache $HOME/.fonts
 
 
 echo "Setting up Vundle"
-if [ ! -d "$vimdir/bundle/Vundle.vim" ]; then
+if [ ! -d "$vimdir/bundle/Vundle.vim/.git" ]; then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+else
+    cd ~/.vim/bundle/Vundle.vim/
+    git pull
+    cd $basedir
 fi
 vim +PluginInstall +qall
 
 #------------------------------------------------------------------------------
 echo "compiling YouCompleteMe"
-
 
 clangversion="llvm"  # Default: download from llvm.org
 #clangversion="local" #Uncomment this line if you wanna use or local version
