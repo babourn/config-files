@@ -3,7 +3,13 @@ basedir=$PWD
 vimdir=$HOME/.vim
 vimfile=$HOME/.vimrc
 distro="unknown"
-packages=( "automake" "cmake" "llvm" "autoconf")
+packages=( "gcc" "automake" "cmake" "llvm" "autoconf")
+
+echo "Making directories"
+mkdir ~/dev
+mkdir ~/git
+mkdir ~/.backup
+
 if [ ! "$(cat /etc/*-release | grep -qw "rhel")" ]; then
     distro="fedora"
 elif [ $(/usr/bin/dpkg --search /usr/bin/dpkg) ]; then
@@ -14,12 +20,12 @@ echo "$distro"
 echo "Update All Current  Packages"
 if [ $distro == "fedora" ]; then
     sudo yum -y update
-    packages+=( "ncurses-devel" "python-devel" "python34-devel" "autotools-devel")
+    packages+=( "gcc-c++" "ncurses-devel" "python-devel" "python34-devel" "autotools-devel")
     
 elif [ $distro == "debian" ]; then
     sudo apt-get -y update
     sudo apt-get -y dist-upgrade
-    packages+=( "libncurses-devel" "python-dev" "python3.5" "autotools-dev")
+    packages+=( "g++"  "libncurses-devel" "python-dev" "python3.5" "autotools-dev")
 fi
 
 echo "Installing dependencies"
