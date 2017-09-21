@@ -4,19 +4,19 @@ vimdir=$HOME/.vim
 vimfile=$HOME/.vimrc
 distro="unknown"
 packages=( "automake" "cmake" "llvm" "autoconf")
-if [ $(/usr/bin/rpm -q -f /usr/bin/rpm) -ne 127 ]; then
+if [ ! "$(cat /etc/*-release | grep -qw "rhel")" ]; then
     distro="fedora"
-elif /usr/bin/dpkg --search /usr/bin/dpkg ; then
+elif [ $(/usr/bin/dpkg --search /usr/bin/dpkg) ]; then
     distro="debian"
 fi
-
+echo "$distro"
 
 echo "Update All Current  Packages"
-if [ $distro = "fedora" ]; then
+if [ $distro == "fedora" ]; then
     sudo yum -y update
     packages+=( "ncurses-devel" "python-devel" "python34-devel" "autotools-devel")
     
-elif [ $distro = "debian" ]; then
+elif [ $distro == "debian" ]; then
     sudo apt-get -y update
     sudo apt-get -y dist-upgrade
     packages+=( "libncurses-devel" "python-dev" "python3.5" "autotools-dev")
@@ -27,12 +27,13 @@ echo "Installing dependencies"
 for i in ${packages[@]}; do
     echo "checking $i"
     
-    if [ $distro = "fedora" ]; then	
-        if  ! rpm -qa |grep -qw $i ; then
+    if [ $distro == "fedora" ]; then
+	echo "fedora installing $i"	
+        if ! rpm -qa | grep -qw "$i" ; then
             sudo yum -y install $i
         fi
-    elif [ $distro = "debian" ]; then
-        if [ $(dpkg-query -W -f'${Status}' $i |grep -qw "install ok installed") ] ; then
+    elif [ $distro == "debian" ]; then
+        if $(dpkg-query -W -f'${Status}' $i |grep -qw "install ok installed") ; then
             sudo apt-get -y install $i
         fi
     fi
@@ -65,8 +66,8 @@ if [-d $HOME/.vimrc ]; then
 fi
 
 echo "link .vim and .vimrc"
-ln -s $HOME/.vim $basedir/.vim
-ln -s $HOME/.vimrc $basedir/.vimrc
+ln -s $basedir/.vim $HOME/.vim
+ln -s $basedir/.vimrc $HOME/.vimrc
 
 echo "download powerline fonts"
 # clone
