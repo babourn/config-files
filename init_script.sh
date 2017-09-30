@@ -101,7 +101,7 @@ vim +PluginInstall +qall
 
 #------------------------------------------------------------------------------
 echo "compiling YouCompleteMe"
-
+if [ ! $(uname -n) == "raspberrypi" ] ; then
 clangversion="llvm"  # Default: download from llvm.org
 if [ $distro == "debian" ]; then
     clangversion="local" #Uncomment this line if you wanna use or local version
@@ -116,7 +116,7 @@ elif [ "$clangversion" = "local" ]; then
 else
     echo "  Error: Invalid option to compile YouCompleteMe Clang completion support"
 fi
-
+fi
 #------------------------------------------------------------------------------
 echo "setup git"
 git config --global user.name "Brian Bourn"

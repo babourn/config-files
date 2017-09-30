@@ -3,6 +3,7 @@ filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+let os = substitute(system('uname -n'), "\n", "", "")
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -21,8 +22,9 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
-Plugin 'Valloric/YouCompleteMe', {'rtp': 'plugin/'}
-
+if os != "raspberrypi"
+    Plugin 'Valloric/YouCompleteMe', {'rtp': 'plugin/'}
+endif
 Plugin 'https://github.com/Raimondi/delimitMate'
 
 "  https://github.com/rafaelnp/rnpvim
