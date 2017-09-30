@@ -3,16 +3,16 @@ basedir=$PWD
 vimdir=$HOME/.vim
 vimfile=$HOME/.vimrc
 distro="unknown"
-packages=( "gcc" "automake" "cmake" "llvm" "autoconf")
+packages=( "gcc" "automake" "cmake" "llvm" "clang" "autoconf")
 
 echo "Making directories"
 mkdir ~/dev
 mkdir ~/git
 mkdir ~/.backup
 
-if [ ! "$(cat /etc/*-release | grep -qw "rhel")" ]; then
+if  grep -qw "rhel" /etc/*-release ; then
     distro="fedora"
-elif [ $(/usr/bin/dpkg --search /usr/bin/dpkg) ]; then
+elif  grep -qw "debian" /etc/*-release ; then
     distro="debian"
 fi
 echo "$distro"
@@ -39,7 +39,7 @@ for i in ${packages[@]}; do
             sudo yum -y install $i
         fi
     elif [ $distro == "debian" ]; then
-        if $(dpkg-query -W -f'${Status}' $i |grep -qw "install ok installed") ; then
+        if ! dpkg-query -s $i  ; then
             sudo apt-get -y install $i
         fi
     fi
@@ -66,7 +66,7 @@ if [ -d $HOME/.vim ]; then
     cp -r $HOME/.vim $basedir/.vim.bak
     rm -rf $HOME/.vim
 fi
-if [-d $HOME/.vimrc ]; then
+if [ -d $HOME/.vimrc ]; then
     cp -r $HOME/.vimrc $basedir/.vimrc
     rm -rf $HOME/.vimrc
 fi
@@ -77,7 +77,7 @@ ln -s $basedir/.vimrc $HOME/.vimrc
 
 echo "download powerline fonts"
 # clone
-if [  ! -d $basedir/fonts ]; then
+if [ ! -d $basedir/fonts ]; then
     git clone https://github.com/powerline/fonts.git
     ln -s ./fonts $HOME/.fonts
 else
@@ -103,7 +103,9 @@ vim +PluginInstall +qall
 echo "compiling YouCompleteMe"
 
 clangversion="llvm"  # Default: download from llvm.org
-#clangversion="local" #Uncomment this line if you wanna use or local version
+if [ $distro == "debian" ]; then
+    clangversion="local" #Uncomment this line if you wanna use or local version
+fi
 cd $vimdir/bundle/YouCompleteMe
 
 if [ "$clangversion" = "llvm" ]; then
